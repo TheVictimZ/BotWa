@@ -337,7 +337,7 @@ haikal.serializeM = (m) => smsg(haikal, m, store)
 haikal.ev.on("connection.update", async (update) => {
 const { connection, lastDisconnect } = update;
 if (connection === "close") {
-  let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
+  let reason = new Boom(lastDisconnect && lastDisconnect.error).output.statusCode;
   if (reason === DisconnectReason.badSession) {
 console.log(`Bad Session File, Please Delete Session and Scan Again`);
 process.exit();
